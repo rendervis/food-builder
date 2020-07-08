@@ -3,16 +3,21 @@ import styled from "styled-components";
 import BurgerIngredient from "./burger-ingredients/burger-ingredients";
 
 const Burger = (props) => {
-  const transformedIngredients = Object.keys(props.ingredients).map(
-    (ingredientsKey) => {
+  let transformedIngredients = Object.keys(props.ingredients)
+    .map((ingredientsKey) => {
       return [...Array(props.ingredients[ingredientsKey])].map((_, i) => {
         console.log(ingredientsKey + i);
         return (
           <BurgerIngredient key={ingredientsKey + i} type={ingredientsKey} />
         );
       });
-    }
-  );
+    })
+    .reduce((initialValue, currentValue) => {
+      return initialValue.concat(currentValue);
+    }, []);
+  if (transformedIngredients.length === 0) {
+    transformedIngredients = <p>Please start adding ingredients.</p>;
+  }
   console.log(transformedIngredients);
   return (
     <BurgerStyled>
