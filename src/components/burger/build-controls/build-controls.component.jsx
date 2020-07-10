@@ -87,11 +87,11 @@ const OrderButton = styled.button`
         animation: enable 0.3s linear;
       }
     `};
-    ${(props) =>
-      props.enabled &&
-      css`
-        animation: ${pulse} 0.75s linear;
-      `};
+  ${(props) =>
+    props.enabled &&
+    css`
+      animation: ${pulse} 0.75s linear;
+    `};
   
 
 `;
