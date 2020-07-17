@@ -10,19 +10,21 @@ const ModalStyled = styled.div`
   z-index: 101;
   background-color: white;
   width: 40%;
+  /* height: 40%; */
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px black;
   padding: 16px;
   top: 30%;
   left: 30%;
   align-self: center;
+  justify-content: center;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
 
   ${(props) =>
     props.noShow &&
     css`
-      transform: translateY(-100vh);
+      transform: translateY(-110vh);
       opacity: "0";
     `};
 
