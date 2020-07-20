@@ -29,4 +29,10 @@ const StyledButton = styled.button`
     css`
       color: #944317;
     `}
+  ${(props) =>
+    props.disabled &&
+    css`
+      color: #ccc;
+      cursor: not-allowed;
+    `}
 `;
