@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import * as action from "../../../store/actions/index";
 
 import { Button } from "../../../components/UI/buttons/buttons.component";
 import Input from "../../../components/UI/input/input.component";
@@ -85,19 +87,17 @@ class ContactData extends Component {
             { value: "cheapest", displayValue: "Cheapest" },
           ],
         },
-        value: "",
+        value: "fastest",
         valid: true,
         validation: {},
       },
     },
     formIsValid: false,
-
-    loading: false,
   };
 
   orderHandler = (event) => {
     event.preventDefault();
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[
@@ -105,19 +105,20 @@ class ContactData extends Component {
       ].value;
     }
     const order = {
-      ingredients: this.props.ingredients,
+      ingredients: this.props.ings,
       price: this.props.price,
       orderData: formData,
-      customer: {
-        name: "Octa",
-        address: {
-          street: "testStreet1",
-          zipCode: "13413242",
-          country: "Romania",
-        },
-        email: "test@test.com",
-      },
+      // customer: {
+      //   name: "Octa",
+      //   address: {
+      //     street: "testStreet1",
+      //     zipCode: "13413242",
+      //     country: "Romania",
+      //   },
+      //   email: "test@test.com",
+      // },
     };
+    this.props.onOrderBurger(order);
   };
 
   checkValidity(value, rules) {
@@ -186,7 +187,7 @@ class ContactData extends Component {
         </Button>
       </form>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
     return (
@@ -212,4 +213,18 @@ const ContactDataStyled = styled.div`
   }
 `;
 
-export default ContactData;
+const mapStateToProps = (state) => {
+  return {
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    loading: state.order.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onOrderBurger: (orderData) => dispatch(action.purchaseBurger(orderData)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactData);
