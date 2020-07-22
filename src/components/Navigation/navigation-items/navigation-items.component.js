@@ -7,7 +7,8 @@ import NavigationItem from "../navigation-item/navigation-item.component";
 const NavigationItems = () => (
   <Items>
     <NavigationItem link="/">Burger Builder</NavigationItem>
-    <NavigationItem link="/orders">ORDERS</NavigationItem>
+    <NavigationItem link="/orderss">ORDERS</NavigationItem>
+    <NavigationItem link="/auth">Authenticate</NavigationItem>
   </Items>
 );
 
